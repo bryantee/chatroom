@@ -1,10 +1,16 @@
 $(document).ready(function() {
-  let socket = io();
-  let input = $('input');
-  let messages = $('#messages');
+  const socket = io();
+  const input = $('input');
+  const messages = $('#messages');
+  const currentUsers = $('.current-users')
 
   const addMessage = function(message) {
     messages.append('<div>' + message + '</div>');
+  }
+
+  const updateUserCount = function(count) {
+    console.log(`Current users: ${count}`);
+    currentUsers.empty().append(count);
   }
 
   input.on('keydown', event => {
@@ -23,5 +29,7 @@ $(document).ready(function() {
   socket.on('arrival', message => {
     console.log(message);
   });
+
+  socket.on('update', updateUserCount);
 
 });
