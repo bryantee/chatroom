@@ -18,10 +18,7 @@ $(document).ready(function() {
     input.val('');
   });
 
-  socket.on('message', message => {
-    console.log('Message received!');
-    addMessage(message);
-  });
+  socket.on('message', addMessage);
 
   socket.on('arrival', message => {
     console.log(message);

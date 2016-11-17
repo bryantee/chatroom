@@ -11,11 +11,12 @@ const server = http.Server(app);
 const io = socket_io(server);
 
 io.on('connection', socket => {
-  socket.broadcast.emit('arrival', 'Thanks for stopping by!');
+  socket.broadcast.emit('message', 'A new user has connected!!');
   console.log('Client Connected');
 
   socket.on('disconnect', () => {
     console.log('User disconnected...');
+    socket.broadcast.emit('message', 'A user has left us :(');
   })
 
   socket.on('message', message => {
